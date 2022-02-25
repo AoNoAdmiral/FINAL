@@ -42,13 +42,6 @@ function Icons() {
       }
       return;
     }
-    function test(){
-      axios.post("http://localhost:3000/test","").then(
-            (res) => {
-              console.log(res)
-            }
-      )
-    }
     return (
     <div>
     <div className="icons" id="here">

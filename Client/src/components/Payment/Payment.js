@@ -12,10 +12,6 @@ function Payment() {
     const [ad3, set3] = useState("");
     let listItem = []
     let listnumber = []
-    function updateAddress(){
-      setAddress(sessionStorage.getItem('address'))
-      document.getElementById("my_field").value = sessionStorage.getItem('address');
-    }
     function changeRoot(event){
         setNote(event.target.value);
     }
@@ -170,7 +166,6 @@ function change3(event){
               </div>
             <div class="form-group">
               <label for="">ĐỊA CHỈ NHẬN HÀNG</label>
-              <label for="" onClick={()=>updateAddress()} className="smallbutt">Dùng địa chỉ đăng kí</label>
               <input type="text" placeholder="132/20 LÝ THƯỜNG KIỆT....." id="my_field" onChange={changeAdd}/>
             </div>
           </div>

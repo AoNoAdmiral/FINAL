@@ -8,20 +8,24 @@ export default function Login(){
     const [loginPhone, set2] = useState("");
     const [loginEmail2, set3] = useState("");
     const [loginPW2, set4] = useState("");
-    const [loginEuser, set5] = useState("");
-    const [loginAddress,set6] = useState("");
-    const [loginBirthday,set7] = useState("");
+    const [loginNumber,set6] = useState("");
     function onChangeUsername(event){
       setEmail(event.target.value);
+    }
+    function showAlert(msg){
+      let alertBox = document.querySelector('.alert-box');
+      let alertMsg = document.querySelector('.alert-msg');
+      alertMsg.innerHTML = msg;
+      alertBox.classList.add('show');
+      setTimeout(()=>{
+          alertBox.classList.remove('show');
+      },3000);
     }
     function onChangePW(event){
       setPw(event.target.value);
     }
     function onChange1(event){
       set1(event.target.value);
-    }
-    function onChange7(event){
-      set7(event.target.value);
     }
     function onChange6(event){
       set6(event.target.value);
@@ -35,15 +39,48 @@ export default function Login(){
     function onChange4(event){
       set4(event.target.value);
     }
-    function onChange5(event){
-      set5(event.target.value);
+    function createsubmit(){
+        axios.post("http://localhost:3000/signup", {
+          name: loginName,
+          email: loginEmail2,
+          password: loginPW2,
+          number: loginNumber
+        })
+        .then(function (response) {
+          if(response.data.status == 0)
+            showAlert(response.data.alert)
+          else{
+            sessionStorage.setItem('email',loginEmail); 
+            window.location = "/login";
+        }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
+    function login(){
+      axios.post("http://localhost:3000/signin", {
+        email: loginEmail,
+        password: loginPW,
+      })
+      .then(function (response) {
+        if(response.data.status == 0)
+          showAlert(response.data.alert)
+        else{
+          sessionStorage.setItem('email',loginEmail); 
+          window.location = "/login";
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
     return(
         <div className="Page">
         <img src="images/loader.gif" className="loader" alt=""/>
     
         <div className="alert-box">
-            <img src="images/error.png" className="alert-img" alt=""/>
+            <img src="https://i.imgur.com/7kl9riE.jpg" className="alert-img" alt=""/>
             <p className="alert-msg">Error message</p>
         </div>
 
@@ -56,7 +93,7 @@ export default function Login(){
                     <div className="form-inner">
                         <div className="form-group">
                             {/* <label for="">Email address</label> */}
-                            <input type="text" className="INPUS" placeholder="Enter your Username" onChange={onChangeUsername} name="email" />
+                            <input type="text" className="INPUS" placeholder="Enter your Email" onChange={onChangeUsername} name="email" />
                         </div>
                         <div className="form-group">
                             {/* <label for="">Password</label> */}
@@ -65,7 +102,7 @@ export default function Login(){
                     </div>
                     <p className="remember"><input type="checkbox" /> <span>Remember me</span></p>
                     <p className="member"> New user? <a onClick={()=>setLogin(1)}>Create an account</a></p>
-                </form> <button className="submit-btn1">Log in</button> </div>:""
+                </form> <button className="submit-btn1" onClick={()=>login()}>Log in</button> </div>:""
                 }
                 {loginState===1?<div>
                 <form>
@@ -86,24 +123,16 @@ export default function Login(){
                     <label for="">Password</label>
                     <input type="password" className="INPUS" placeholder="Create your password" autocomplete="off" name="password"  onChange={onChange4}/>
                 </div>
-                </div>
-                <div class="form-group">
-                    <label for="">Username</label>
-                    <input type="username" className="INPUS" placeholder="Create your username" autocomplete="off" name="username"  onChange={onChange5}/>
-                </div>
                 <div class="form-group">
                     <label for="">Address</label>
-                    <input type="Address" className="INPUS" placeholder="Write your Address" autocomplete="off" name="Address"  onChange={onChange6}/>
+                    <input type="Phone" className="INPUS" placeholder="Enter your phone" autocomplete="off" name="Phone"  onChange={onChange6}/>
                 </div>
-                <div class="form-group">
-                    <label for="">Birthday</label>
-                    <input type="date" className="INPUS" placeholder="Write your Birthday" autocomplete="off" name="Birthday"  onChange={onChange7}/>
                 </div>
                 <p class="remember">
                     <input type="checkbox" /> <span>Remember me</span>
                 </p>
                 <p class="member"> Are you a member ? <a onClick={()=>setLogin(0)}>Login now</a></p>
-                </form><button class="submit-btn">Create an account</button></div>:""
+                </form><button class="submit-btn" onClick={()=>createsubmit()}>Create an account</button></div>:""
                 }
             </div>
             <div className="right">
