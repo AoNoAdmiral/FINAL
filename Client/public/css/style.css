@@ -154,6 +154,13 @@ section {
   -webkit-transition: .4s linear;
   transition: .4s linear;
 }
+.product-details{
+  transition: .4s linear;
+}
+
+.product-details.off{
+  left: -2000px;
+}
 
 .header .search-form input {
   height: 100%;
@@ -1916,5 +1923,14 @@ button {
   .contact .row form .inputBox input {
     width: 100%;
   }
+}
+
+.apply-form{
+  left:25%;
+  top:15%;
+}
+
+.apply-form.hide{
+  left:-1000px;
 }
 /*# sourceMappingURL=style.css.map */

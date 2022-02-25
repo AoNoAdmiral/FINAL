@@ -13,21 +13,21 @@ function toggleFlag(index){
 }
 function ProductItems() {
     function buyItem(props,size,index){
-        if (!sessionStorage.getItem('id')){
+        if (!sessionStorage.getItem('email')){
             window.location = "/login";
             return;
         }
         var x = JSON.parse(sessionStorage.getItem('Order'))
         for(const a in x){
             let com = JSON.parse(x[a])
-          if (com[0] === props[0] && com[5]===size){
-            com[4]++;
-            x[a] = JSON.stringify(com)
-            sessionStorage.setItem('Order',JSON.stringify(x));
-            return;
+            if (com[0] === props[0] && com[5]===size){
+                com[4]++;
+                x[a] = JSON.stringify(com)
+                sessionStorage.setItem('Order',JSON.stringify(x));
+                return;
           }
         }
-        x.push(JSON.stringify({0:props[0],1:props[1],2:JSON.parse(props[9])[index],3:props[3],4:1,5:size}));
+        x.push(JSON.stringify({0:index,1:props[1],2:props[2],3:props[3],4:1,5:size}));
         sessionStorage.setItem('Order',JSON.stringify(x));  
     }
     const [Popple,setPopple] = useState(-1);
@@ -54,13 +54,12 @@ function ProductItems() {
         <div className="box-container">
             {data.map(function(ex,index){
                 let props = JSON.parse(ex);
-                console.log(props)
                 return(
-                    <div className="box" data-item={props[6]}>
+                    <div className="box" data-item={props[7]}>
                         <div className="icons">
-                            <a className="fas fa-shopping-cart" onClick={()=>buyItem(props,JSON.parse(props[8])[0],0)}></a>
+                            <a className="fas fa-shopping-cart" onClick={()=>buyItem(props,JSON.parse(props[8])[0],index)}></a>
                             <a className = {`flag-${index} fas fa-heart heart`} onClick={ ()=> toggleFlag(index) }></a>
-                            <a className="fas fa-eye" onClick={()=>{setPopple(index); setA(JSON.parse(props[8])[0]); setB(JSON.parse(props[9])[0])}}></a>
+                            <a className="fas fa-eye" onClick={()=>{setPopple(index); setA(JSON.parse(props[8])[0]); setB(props[2])}}></a>
                         </div>
                         <div className="image">
                             <img src={props[2]} alt=""/>
@@ -69,16 +68,6 @@ function ProductItems() {
                             <h3>{props[1]}</h3>
                             <div className="price">
                                 <div className="amount">{props[3]} VND</div>
-                                {/* <div className="cut">{props[4]}</div>
-                                <div className="offer">{props[5]}</div> */}
-                            </div>
-                            <div className="stars">
-                                <i className="fas fa-star"></i>
-                                <i className="fas fa-star"></i>
-                                <i className="fas fa-star"></i>
-                                <i className="fas fa-star"></i>
-                                <i className="far fa-star"></i>
-                                <span>{props[5]}</span>
                             </div>
                         </div>
                         {Popup(props,Popple,index,setPopple,a,setA,b,setB,c,setC)}

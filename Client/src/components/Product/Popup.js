@@ -16,7 +16,7 @@ export default function Popup(props,num,trigger,setTrigger,trigger1, settrigge12
     setTrigger(-1);
   }
     return( (trigger === num )?
-        <section class="product-details">
+        <section class="product-details on">
         <span class="closeIcon" id="closeIcon" onClick={()=>{setTrigger(-1); setC(0);}}>
             <i class="fas fa-times"></i>
         </span>
@@ -24,7 +24,7 @@ export default function Popup(props,num,trigger,setTrigger,trigger1, settrigge12
         <div class="details">
           <h2 class="product-brand">{props[1]}</h2>
           <div class="scroll-object">
-          <p class="product-short-des">{props[7]}</p>
+          <p class="product-short-des">{props[9]}</p>
           </div>
           <span class="product-price">PRICE: {props[3].toLocaleString()}</span>
           {/* <span class="product-actual-price">{props[4]}</span>
@@ -36,13 +36,41 @@ export default function Popup(props,num,trigger,setTrigger,trigger1, settrigge12
               return(
                 <span>
                   <input type="radio" name="size" value="XL" hidden id="xl_size"/>
-                  <label for="size" class={trigger1===size?"size_radio_btn active":"size_radio_btn"} onClick={()=>{settrigge12(size); setLoL(JSON.parse(props[9])[index]); setC(index) }}>{size}</label>
+                  <label for="size" class={trigger1===size?"size_radio_btn active":"size_radio_btn"} onClick={()=>{settrigge12(size); setLoL((props[2])); setC(index) }}>{size}</label>
                 </span>
               )
             })}
           </div>
           <button class="btn cart-btn" onClick={()=>buyItem(props,trigger1,c)}>add to cart</button>
         </div>
-    </section>:""
+    </section>:        
+    <section class="product-details off">
+        <span class="closeIcon" id="closeIcon" onClick={()=>{setTrigger(-1); setC(0);}}>
+            <i class="fas fa-times"></i>
+        </span>
+        <img class="image-slider" src={lol}></img>
+        <div class="details">
+          <h2 class="product-brand">{props[1]}</h2>
+          <div class="scroll-object">
+          <p class="product-short-des">{props[9]}</p>
+          </div>
+          <span class="product-price">PRICE: {props[3].toLocaleString()}</span>
+          {/* <span class="product-actual-price">{props[4]}</span>
+          <span class="product-discount"> {props[5]}</span> */}
+
+          <div class="choose-size">
+            <p class="product_sub_heading">select size</p>
+            {JSON.parse(props[8]).map(function(size,index){
+              return(
+                <span>
+                  <input type="radio" name="size" value="XL" hidden id="xl_size"/>
+                  <label for="size" class={trigger1===size?"size_radio_btn active":"size_radio_btn"} onClick={()=>{settrigge12(size); setLoL((props[2])); setC(index) }}>{size}</label>
+                </span>
+              )
+            })}
+          </div>
+          <button class="btn cart-btn" onClick={()=>buyItem(props,trigger1,c)}>add to cart</button>
+        </div>
+    </section>
     )
 }

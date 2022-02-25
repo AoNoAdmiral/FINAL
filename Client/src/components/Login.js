@@ -8,7 +8,6 @@ export default function Login(){
     const [loginPhone, set2] = useState("");
     const [loginEmail2, set3] = useState("");
     const [loginPW2, set4] = useState("");
-    const [loginNumber,set6] = useState("");
     function onChangeUsername(event){
       setEmail(event.target.value);
     }
@@ -27,9 +26,6 @@ export default function Login(){
     function onChange1(event){
       set1(event.target.value);
     }
-    function onChange6(event){
-      set6(event.target.value);
-    }
     function onChange2(event){
       set2(event.target.value);
     }
@@ -44,14 +40,14 @@ export default function Login(){
           name: loginName,
           email: loginEmail2,
           password: loginPW2,
-          number: loginNumber
+          number: loginPhone
         })
         .then(function (response) {
           if(response.data.status == 0)
             showAlert(response.data.alert)
           else{
             sessionStorage.setItem('email',loginEmail); 
-            window.location = "/login";
+            window.location = "/";
         }
         })
         .catch(function (error) {
@@ -68,7 +64,7 @@ export default function Login(){
           showAlert(response.data.alert)
         else{
           sessionStorage.setItem('email',loginEmail); 
-          window.location = "/login";
+          window.location = "/";
         }
       })
       .catch(function (error) {
@@ -122,10 +118,6 @@ export default function Login(){
                 <div class="form-group">
                     <label for="">Password</label>
                     <input type="password" className="INPUS" placeholder="Create your password" autocomplete="off" name="password"  onChange={onChange4}/>
-                </div>
-                <div class="form-group">
-                    <label for="">Address</label>
-                    <input type="Phone" className="INPUS" placeholder="Enter your phone" autocomplete="off" name="Phone"  onChange={onChange6}/>
                 </div>
                 </div>
                 <p class="remember">
