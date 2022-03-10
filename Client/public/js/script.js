@@ -41,30 +41,6 @@ window.onscroll = () =>{
   navbar.classList.remove('active');
 }
 
-let filterBtn = document.querySelectorAll('.filter-buttons .buttons');
-
-filterBtn.forEach(button =>{
-  button.onclick = () =>{
-    let filterItem = document.querySelectorAll('.products .box-container .box');
-    filterBtn.forEach(btn => btn.classList.remove('active'));
-    button.classList.add('active');
-    let dataFilter = button.getAttribute('data-filter');
-    filterItem.forEach(item =>{
-
-      item.classList.remove('active');
-      item.classList.add('hide');
-
-      if(item.getAttribute('data-item').indexOf(dataFilter) > -1  || dataFilter == 'all'){
-        item.classList.remove('hide');
-        item.classList.add('active');
-      }
-
-    });
-
-  };
-
-});
-
 let linkfilterBtn = document.querySelectorAll('.filterLink');
 linkfilterBtn.forEach(button =>{
 

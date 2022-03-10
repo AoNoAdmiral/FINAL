@@ -100,7 +100,14 @@ section {
       -ms-flex-pack: justify;
           justify-content: space-between;
   padding: 2rem 9%;
-  background: #fff;
+  background: #EFFFFD;
+}
+
+#login-btn.fas.fa-user:before{
+  color: white;
+}
+.fa-arrow-right:before ,.fa-calendar:before, .fa-user:before{
+  color: #42C2FF;
 }
 
 .header .logo {
@@ -347,6 +354,7 @@ section {
 }
 
 .products .box-container .box {
+  margin: 5rem;
   width: 26rem;
   border-radius: .5rem;
   overflow: hidden;
@@ -1778,6 +1786,15 @@ section {
     padding-left: 2rem;
   }
 }
+.Page1{
+  display: flex;
+  align-items: center;
+  gap: 1.5;
+  margin-bottom: 1.5rem;
+  position: relative;
+  background-color: white;
+  flex-wrap: wrap;
+}
 #fname{
   width: 400px;
 }
@@ -1828,6 +1845,38 @@ button {
   border-radius: 2px;
   background-color: #f87253;
   cursor: pointer;
+}
+#pagination {
+  display: inline-block;
+}
+.bbb{
+  width:100%;
+}
+#pagination a {
+  color: black;
+  float: left;
+  padding: 16px 32px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  font-size: 24px;
+}
+
+#pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+#pagination a:hover:not(.active) {background-color: #ddd;}
+
+#pagination a:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+#pagination a:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 .INPUS{
   text-transform:none;
@@ -1904,6 +1953,7 @@ button {
   }
   .products .box-container .box {
     width: 100%;
+    margin-left:2rem;
   }
   .deal .image img {
     width: 100%;
