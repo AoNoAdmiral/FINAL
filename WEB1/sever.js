@@ -287,6 +287,18 @@ app.post('/get-products',(req, res)=>{
     })
 })
 
+app.post('/addbill',(req, res)=>{
+    res.header('Access-Control-Allow-Origin',"*");
+    res.header('Access-Control-Allow-Methods','GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers','Content-Type');
+    let { email,order} = req.body;
+    x = "order"+Math.floor(Math.random() * 1000);
+    db.collection('order').doc(x).set(req.body)
+                   .then(data => {
+                       res.json({'status': 1})
+                   })
+})
+
 // app.post('/delete-product', (req,res)=> {
 //     let {id} = req.body;
 //     db.collection('products').doc(id).delete()

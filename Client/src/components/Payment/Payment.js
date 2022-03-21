@@ -89,7 +89,17 @@ function change3(event){
         sessionStorage.setItem('Order',JSON.stringify(x));  
       }
     function submit(){
-
+      axios.post("http://localhost:3000/addbill", {
+        email: sessionStorage.getItem('email'),
+        order:JSON.parse(sessionStorage.getItem('Order'))
+      })
+      .then(function (response) {
+        if(response.data.status==1)
+          window.location = "/";
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     }
     return (
     <section class="cart">
