@@ -141,9 +141,6 @@ app.post('/signup',(req,res)=>{
     })
 })
 
-app.use((req,res)=>{
-    console.log("Caught one");
-})
 //routers
 //router home
 // app.get("/", (req, res) =>{
@@ -268,36 +265,27 @@ app.use((req,res)=>{
 
 // })
 
-// //get products
-// app.post('/get-products',(req, res)=>{
-//     let { email, id , tag} = req.body;
+//get products
+app.post('/get-products',(req, res)=>{
+    res.header('Access-Control-Allow-Origin',"*");
+    res.header('Access-Control-Allow-Methods','GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers','Content-Type');
+    docRef = db.collection('products')
 
-//     if(id){
-//        docRef = db.collection('products').doc(id)
-//     } else if(tag) {
-//         docRef =  db.collection('products').where('tags', 'array-contains', tag)
-//     }else{
-//        docRef = db.collection('products').where('email', '==', email);
-//     }
-
-//     docRef.get()
-//     .then(products =>{
-//         if(products.empty){
-//             return res.json('no products');
-//         }
-//         let productArr = [];
-//         if(id){
-//             return res.json(products.data());
-//         } else{
-//             products.forEach(item =>{
-//                 let data = item.data();
-//                 data.id =item.id;
-//                 productArr.push(data);
-//             })
-//             res.json(productArr);
-//         }
-//     })
-// })
+    docRef.get()
+    .then(products =>{
+        if(products.empty){
+            return res.json('no products');
+        }
+        let productArr = [];
+        products.forEach(item =>{
+                let data = item.data();
+                data.id =item.id;
+                productArr.push(data);
+            })
+        res.json(productArr);
+    })
+})
 
 // app.post('/delete-product', (req,res)=> {
 //     let {id} = req.body;
@@ -321,6 +309,9 @@ app.use((req,res)=>{
 
 
 
+app.use((req,res)=>{
+    console.log("Caught one");
+})
 
 app.listen(3000, ()=>{
     console.log('listening on port 3000 .........');

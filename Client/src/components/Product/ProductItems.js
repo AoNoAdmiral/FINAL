@@ -12,7 +12,7 @@ function toggleFlag(index){
     )
 }
 function ProductItems() {
-    function buyItem(props,size,index){
+    function buyItem(props,index){
         if (!sessionStorage.getItem('email')){
             window.location = "/login";
             return;
@@ -20,18 +20,17 @@ function ProductItems() {
         var x = JSON.parse(sessionStorage.getItem('Order'))
         for(const a in x){
             let com = JSON.parse(x[a])
-            if (com[0] === props[0] && com[5]===size){
+            if (com[1] === props[1]){
                 com[4]++;
                 x[a] = JSON.stringify(com)
                 sessionStorage.setItem('Order',JSON.stringify(x));
                 return;
           }
         }
-        x.push(JSON.stringify({0:index,1:props[1],2:props[2],3:props[3],4:1,5:size}));
+        x.push(JSON.stringify({0:index,1:props[1],2:props[2],3:props[3],4:1}));
         sessionStorage.setItem('Order',JSON.stringify(x));  
     }
     const [Popple,setPopple] = useState(-1);
-    const [a,setA] = useState(1);
     const [data,setData] = useState([]); 
     const [Page,setPage] = useState([]); 
     const [stop,setStop] = useState(0);
@@ -101,9 +100,9 @@ function ProductItems() {
                         return(
                         <div className="box" data-item={props[7]}>
                         <div className="icons">
-                            <a className="fas fa-shopping-cart" onClick={()=>buyItem(props,JSON.parse(props[8])[0],index)}></a>
+                            <a className="fas fa-shopping-cart" onClick={()=>buyItem(props,index)}></a>
                             <a className = {`flag-${index} fas fa-heart heart`} onClick={ ()=> toggleFlag(index) }></a>
-                            <a className="fas fa-eye" onClick={()=>{setPopple(index); setA(JSON.parse(props[8])[0]); setB(props[2])}}></a>
+                            <a className="fas fa-eye" onClick={()=>{setPopple(index); setB(props[2])}}></a>
                         </div>
                         <div className="image">
                             <img src={props[2]} alt=""/>
@@ -114,7 +113,7 @@ function ProductItems() {
                                 <div className="amount">{props[3]} VND</div>
                             </div>
                         </div>
-                        {Popup(props,Popple,index,setPopple,a,setA,b,setB,c,setC)}
+                        {Popup(props,Popple,index,setPopple,b,setB,c,setC)}
                         </div>
                         )
                     })}

@@ -34,7 +34,7 @@ function Icons() {
       var x = JSON.parse(sessionStorage.getItem('Order'))
       for(const a in x){
           let com = JSON.parse(x[a])
-        if (com[0] === props[0]){
+        if (com[1] === props[1]){
           x.splice(a,1);
           sessionStorage.setItem('Order',JSON.stringify(x));
           return;
@@ -57,7 +57,7 @@ function Icons() {
           <div className="box">
             <i className="fa fa-times" onClick={()=>removeItem(props)}></i>
             <div className="content">
-              <h3>{props[1]+"("+props[5]+")"}</h3>
+              <h3>{props[1]}</h3>
               <img src={props[2]} className="Payimage" alt=""/>
               <span className="quantity">{props[4]}</span>
               <span className="multiply">X</span>

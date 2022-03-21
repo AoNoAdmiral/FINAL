@@ -13,16 +13,33 @@ import axios from 'axios';
 import {products} from './components/Product/Data';
 const Mainpage = () =>{
     try {
-        console.log(JSON.parse(JSON.stringify(products)))
-        const localData = [];
-        for (let i = 0; i < products.length; i++) {
-            localData.push(JSON.stringify(products[i]))
-        }
-        sessionStorage.setItem('Data',JSON.stringify(localData))
+        // console.log(JSON.parse(JSON.stringify(products)))
+        // const localData = [];
+        // for (let i = 0; i < products.length; i++) {
+        //     localData.push(JSON.stringify(products[i]))
+        // }
+        // sessionStorage.setItem('Data',JSON.stringify(localData))
     //     let size = [];
     //     let loz = [];
-    //     const response = axios.get("http://localhost:3000/product").then(
-    //         (res) => {
+    const localData = [];
+    axios.post("http://localhost:3000/get-products", {
+
+      })
+      .then(function (response) {
+        console.log(response['data'])
+        for (let i = 0; i < response['data'].length; i++) {
+            localData.push(JSON.stringify(response['data'][i]))
+        }
+        sessionStorage.setItem('Data',JSON.stringify(localData))
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+        // const response = axios.get("http://localhost:3000/get-products").then(
+        //     (res) => {
+        //         console.log(1)
+        //     }
+        //     )
     //             for(const x in res.data.products){
     //                 const res2 = axios.get("http://localhost:3000/productitem/"+res.data.products[x]['id']).then( (ans)=>{
     //                     size = []

@@ -8,9 +8,8 @@ function FilterButtons() {
         <div className={'buttons'} data-filter="featured">featured</div>
         <div className={'buttons'} data-filter="special">special offer</div>
         <div className={'buttons'} data-filter="seller">best seller</div>
-        <div className={'buttons'} data-filter="men">Males</div>
-        <div className={'buttons'} data-filter="female">Females</div>
-        <div className={'buttons'} data-filter="kids">Kids</div>
+        <div className={'buttons'} data-filter="men">Fruit</div>
+        <div className={'buttons'} data-filter="female">Vegetables</div>
     </div>
     )
 }

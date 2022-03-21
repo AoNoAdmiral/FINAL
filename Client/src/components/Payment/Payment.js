@@ -50,7 +50,7 @@ function change3(event){
         var x = JSON.parse(sessionStorage.getItem('Order'))
         for(const a in x){
             let com = JSON.parse(x[a])
-          if (com[0] === props[0]){
+          if (com[1] === props[1]){
             x.splice(a,1);
             sessionStorage.setItem('Order',JSON.stringify(x));
             return;
@@ -58,25 +58,25 @@ function change3(event){
         }
         return;
       }
-      function buyItem(props,size){
+      function buyItem(props){
         var x = JSON.parse(sessionStorage.getItem('Order'))
         for(const a in x){
             let com = JSON.parse(x[a])
-          if (com[0] === props[0] && com[5]===size ){
+          if (com[1] === props[1] ){
             com[4]++;
             x[a] = JSON.stringify(com)
             sessionStorage.setItem('Order',JSON.stringify(x));
             return;
           }
         }
-        x.push(JSON.stringify({0:props[0],1:props[1],2:props[2],3:props[3],4:1,5:size}));
+        x.push(JSON.stringify({1:props[1],2:props[2],3:props[3],4:1}));
         sessionStorage.setItem('Order',JSON.stringify(x));  
       }
-      function lowerItem(props,size){
+      function lowerItem(props){
         var x = JSON.parse(sessionStorage.getItem('Order'))
         for(const a in x){
             let com = JSON.parse(x[a])
-          if (com[0] === props[0] && com[5]===size ){
+          if (com[1] === props[1] ){
             com[4]--;
             if (com[4]!=0){
             x[a] = JSON.stringify(com)
@@ -85,7 +85,7 @@ function change3(event){
             return;
           }
         }
-        x.push(JSON.stringify({0:props[0],1:props[1],2:props[2],3:props[3],4:1,5:size}));
+        x.push(JSON.stringify({1:props[1],2:props[2],3:props[3],4:1}));
         sessionStorage.setItem('Order',JSON.stringify(x));  
       }
     function submit(){
@@ -109,13 +109,12 @@ function change3(event){
                         <i class="fas fa-times" onClick={()=>removeItem(props)}></i>
                     </span>
                 </div>
-                <span class="cart_items_details-size">Size: {props[5]}</span>
                 <div class="cart_items_details-bottom">
                     <span class="cart_items_details-price">{props[3].toLocaleString()} VND</span>
                     <div class="controls">
-                        <button class="minusIcon" type="button" onClick={()=>lowerItem(props,props[5])}>-</button>
+                        <button class="minusIcon" type="button" onClick={()=>lowerItem(props)}>-</button>
                         <span class="count" id="count">{props[4]}</span>
-                        <button class="plusIcon"  type="button" onClick={()=>buyItem(props,props[5])}>+</button>
+                        <button class="plusIcon"  type="button" onClick={()=>buyItem(props)}>+</button>
                     </div>
                 </div>
             </div>

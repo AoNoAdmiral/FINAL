@@ -107,7 +107,7 @@ section {
   color: white;
 }
 .fa-arrow-right:before ,.fa-calendar:before, .fa-user:before{
-  color: #42C2FF;
+  color: white;
 }
 
 .header .logo {
@@ -1366,17 +1366,17 @@ section {
   border: 1px solid #383838;
   border-radius: 20px;
   display: block;
-  margin: 5% 20%;
+  margin: 10% 25%;
   max-width: 1600px;
-  width: 65%;
-  height:85%;
+  width: 50%;
+  height:70%;
   padding: 6rem 6vw;
   display: flex;
   justify-content: space-between;
 }
 .product-details .image-slider {
   width: 60%;
-  height: 80%;
+  height: 60%;
   position: relative;
   margin-right:3rem;
 }
